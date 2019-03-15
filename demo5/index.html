@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webSocket</title>
+    <script src="socket.io.dev.js"></script>
+</head>
+<body>
+    <script>
+        var socket = io("ws://127.0.0.1:8000"); 
+        socket.on("news",function(data){//客户端接收到emit发送的数据执行的操作
+            console.log(data);//将接收到的数据输出
+            socket.emit("my other event",{my:"data"});//发送数据
+        })   
+    </script>
+</body>
+</html>

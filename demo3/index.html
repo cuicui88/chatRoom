@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Room</title>
+</head>
+<body>
+    <h1>Echo Test</h1>
+    <input id="sendText" type="text">
+    <button id="sendBtn">发送</button>
+    <script type="text/javascript">
+        var websocket=new WebSocket("ws://127.0.0.1:8000/");//注意协议
+        function showMessage(str){
+            var div = document.createElement("div");
+            div.innerHTML=str;
+            document.body.appendChild(div);
+        }
+        websocket.onopen = function(){
+            console.log("websocket open");
+            document.getElementById("sendBtn").onclick= function(){
+                var txt = document.getElementById("sendText").value;
+                if(txt){
+                    websocket.send(txt);
+                }    
+                
+            }
+        }
+        websocket.onclose = function(){
+            console.log("websocket close");//关闭一个websocket的时候触发
+        }
+        //接收数据
+        websocket.onmessage = function(e){//实现在浏览器端创建div块并对其内容进行显示
+            console.log(e.data);
+            showMessage(e.data);
+        }
+        
+    </script>
+</body>
+</html>

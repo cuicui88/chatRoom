@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Room</title>
+    <script src="socket.io.dev.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3 id="user">聊天进行中......</h3>
+
+    <div class="chatRoom" id="chatRoom">
+        
+    </div>
+    <!-- <div class="enterInfo" id="enterInfo">
+
+    </div> -->
+    <div class="chatBox">
+        <input id="sendText" type="text" class="sendText">
+        <button id="sendBtn" class="sendBtn">发送</button>
+    </div>    
+    <script type="text/javascript">
+        var socket=io("ws://127.0.0.1:8000/");//注意协议
+        function showMessage(str,type){
+            var div = document.createElement("div");
+            var divParent = document.createElement("div");
+            if(type == "enter"||type == "leave"){
+                div.innerHTML=str;
+                div.className = "enter";
+                divParent.className = "enterParent";
+                divParent.appendChild(div);
+                document.getElementById('chatRoom').appendChild(divParent);
+            } else if(type == "message"){
+                div.className = "userName";
+                divParent.className = "text";
+                div.innerHTML=str.slice(0,str.indexOf(":"));
+                divParent.innerHTML=str.slice(str.indexOf(":")+1);
+                document.getElementById('chatRoom').appendChild(div);
+                document.getElementById('chatRoom').appendChild(divParent);
+            }
+            
+        }
+       
+        document.getElementById("sendBtn").onclick= function(){
+            var txt = document.getElementById("sendText").value;
+            if(txt){
+                socket.emit("message",txt);
+                var div = document.createElement("div");
+                var divParent = document.createElement("div");
+                div.className = "myText";
+                divParent.className = "TextParent";
+                divParent.appendChild(div);
+                div.innerHTML= txt;
+                document.getElementById('chatRoom').appendChild(divParent);
+            }
+            document.getElementById("sendText").value = "";
+        };
+        
+        socket.on("enter",function(data){
+            showMessage(data,"enter");
+        });
+        socket.on("message",function(data){
+            showMessage(data,"message");
+        });
+        socket.on("leave",function(data){
+            showMessage(data,"leave");
+        });
+    </script>
+</body>
+</html>

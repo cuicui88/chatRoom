@@ -1,0 +1,83 @@
+h3{
+    position: relative;
+    left:100px;
+}
+.chatRoom{
+    width:400px;
+    height:500px;
+    background:url(back.jpg);
+    float:left;
+    margin-left:50px;
+    border: 3px dashed sandybrown;
+    border-radius: 5px;
+    padding:25px;
+    overflow-y:auto;
+    overflow-x:hidden;
+
+}
+.enterParent{
+    width:100%;
+    text-align: center;
+}
+.enter{
+    color:white;
+    margin:5px auto;
+    padding:3px;
+    padding-left:10px;
+    padding-right:10px;
+    background-color: rgba(0,0,0,0.2);
+    display:inline-block;
+    border-radius:5px;
+    font-size:12px;
+}
+ .userName{
+    display:block;
+    width:400px;
+    font-size:12px;
+    color:white;
+}
+.text{
+    display:inline-block;
+    padding:10px;
+    font-size:16px;
+    background-color: white;
+    border-radius: 3px;
+    margin-top:5px;
+}
+.TextParent{
+    text-align:right;
+}
+.myText{
+    display:inline-block;
+    padding:10px;
+    font-size:16px;
+    background-color:rgb(168,236,108);
+    border-radius: 3px;
+    margin-top:5px;
+    position:relative;
+    right:10px;
+
+}
+.chatBox{
+    position:fixed;
+    left:60px;
+    bottom:23px;
+    width:600px;
+    height:42px;
+}
+.sendText{
+    width:342px;
+    float:left;
+    height:38px;
+    border:1px solid rgb(158, 158, 185);
+    padding-left:10px;
+    border-radius:5px;
+}
+.sendBtn{
+    background-color: rgb(85, 92, 158);
+    color:white;
+    height:42px;
+    float:left;
+    width:100px;
+    border-radius:6px;
+}
